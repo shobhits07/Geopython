@@ -1,0 +1,20 @@
+### Python 
+
+import geopandas as gpd
+
+# Define the path to the input shapefile
+shapefile_path = r"path\shapefilenameVM.shp"  # Replace with your shapefile path
+
+# Define the path to the output GeoPackage
+output_gpkg_path = r"path\shapefilename.gpkg"  # Replace with your GeoPackage path
+
+# Load the shapefile using GeoPandas
+gdf = gpd.read_file(shapefile_path)
+
+# Define the layer name for the GeoPackage (usually the same as the shapefile name without extension)
+layer_name = shapefile_path.split('\\')[-1].replace('.shp', '')
+
+# Save the GeoDataFrame to a GeoPackage
+gdf.to_file(output_gpkg_path, layer=layer_name, driver="GPKG")
+
+print(f"Shapefile has been successfully exported to {output_gpkg_path}")
