@@ -1,0 +1,27 @@
+import folium  # Import the folium library for creating maps
+import pandas as pd  # Import the pandas library for data manipulation
+
+# Create sample data (latitude, longitude, city names)
+data = {  # Create a dictionary to store our data
+    'lat': [51.5074, 48.8566, 40.7128],  # List of latitudes for each city
+    'lon': [-0.1278, 2.3522, -74.0060],  # List of longitudes for each city
+    'city': ['London', 'Paris', 'New York']  # List of city names
+}
+
+df = pd.DataFrame(data)  # Convert the dictionary to a pandas DataFrame for easier handling
+print(df)  # Print the DataFrame to see the data
+
+# Initialize the map centered around London
+m = folium.Map(location=[51.5074, -0.1278], zoom_start=5)  # Create a folium map object
+#  - location: center coordinates for the map (latitude, longitude)
+#  - zoom_start: initial zoom level (higher value for closer zoom)
+
+# Add markers for each city
+for index, row in df.iterrows():  # Loop through each row of the DataFrame
+    folium.Marker(  # Create a marker object for each city
+        [row['lat'], row['lon']],  # Set the marker location using data from the DataFrame
+        popup=row['city']  # Set the popup text for the marker using the city name
+    ).add_to(m)  # Add the marker to the map
+
+# Display the map
+m
