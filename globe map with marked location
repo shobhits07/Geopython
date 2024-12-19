@@ -1,0 +1,34 @@
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
+# Coordinates of Varanasi (longitude, latitude)
+varanasi_coords = (82.9739, 25.3176)
+
+# Create a figure and axis for the globe
+fig = plt.figure(figsize=(10, 10))
+ax = plt.axes(projection=ccrs.Orthographic(central_longitude=varanasi_coords[0], central_latitude=varanasi_coords[1]))
+
+# Set a dark background
+ax.set_facecolor('black')
+
+# Add minimal features to the globe
+ax.add_feature(cfeature.LAND, color='dimgray')
+ax.add_feature(cfeature.OCEAN, color='black')
+ax.add_feature(cfeature.COASTLINE, linewidth=0.5, color='white')
+
+# Ensure the globe appears circular
+ax.set_global()
+ax.set_aspect('equal')
+
+# Plot Varanasi with a pin-like marker
+ax.plot(varanasi_coords[0], varanasi_coords[1], marker='o', color='red', markersize=12, transform=ccrs.Geodetic(), label='Varanasi')
+
+# Add a title
+plt.title('Varanasi Highlighted on a Globe', fontsize=16, color='white')
+
+# Remove default gridlines for simplicity
+ax.gridlines(draw_labels=False)
+
+# Show the globe
+plt.show()
